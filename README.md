@@ -17,6 +17,9 @@ A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an Ng
 
 ## Configuration
 
+<details>
+<summary><strong>For Linux</strong></summary>
+
 1. Copy `.env.example`:
 
 ```bash
@@ -29,7 +32,27 @@ cp .env.example .env
 sed -i "s/SEARXNG_SECRET=.*/SEARXNG_SECRET=$(openssl rand -hex 32)/" .env
 ```
 
-3. The Nginx `server_name` is composed from `SUBDOMAIN` and `DOMAIN`. By default its `searxng.local`. Change it if needed.
+</details>
+
+<details>
+<summary><strong>For Windows</strong></summary>
+
+1. Copy `.env.example`:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+2. Generate a random secret key:
+
+```powershell
+$secret = -join ((1..32) | ForEach-Object { "{0:x2}" -f (Get-Random -Max 256) })
+(Get-Content .env) -replace 'SEARXNG_SECRET=.*', "SEARXNG_SECRET=$secret" | Set-Content .env
+```
+
+</details>
+
+> The Nginx `server_name` is composed from `SUBDOMAIN` and `DOMAIN`. By default it's `searxng.local`. Change it if needed.
 
 ## Usage
 
