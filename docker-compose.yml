@@ -22,6 +22,27 @@ services:
     networks:
       - searxng-network
 
+  dozzle:
+    container_name: searxng-dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - searxng-dozzle-data:/data
+    networks:
+      - searxng-network
+    environment:
+      # Define base path of dozzle
+      - DOZZLE_BASE=/logs
+      # 
+      # Uncomment to enable container actions (stop, start, restart). See https://dozzle.dev/guide/actions
+      - DOZZLE_ENABLE_ACTIONS=true
+      #
+      # Uncomment to allow access to container shells. See https://dozzle.dev/guide/shell
+      - DOZZLE_ENABLE_SHELL=true
+      #
+      # Uncomment to enable authentication. See https://dozzle.dev/guide/authentication
+      # - DOZZLE_AUTH_PROVIDER=simple
+
   nginx:
     container_name: searxng-nginx
     image: nginx:mainline-alpine
@@ -31,9 +52,10 @@ services:
     env_file: ./.env
     environment:
       - DOMAIN_NAME=${SUBDOMAIN}.${DOMAIN}
-      - BACKEND_URL=http://core:${SEARXNG_PORT:-8080}/
+      - SEARXNG_URL=http://core:${SEARXNG_PORT:-8080}/
+      - DOZZLE_URL=http://dozzle:8080/logs/
     command: >
-      /bin/sh -c "envsubst '$${DOMAIN_NAME} $${BACKEND_URL}'
+      /bin/sh -c "envsubst '$${DOMAIN_NAME} $${SEARXNG_URL} $${DOZZLE_URL}'
       < /etc/nginx/conf.d/default.conf.template
       > /etc/nginx/conf.d/default.conf
       && nginx -g 'daemon off;'"
@@ -44,10 +66,12 @@ services:
     depends_on:
       - core
       - valkey
+      - dozzle
 
 volumes:
   searxng-core-data:
   searxng-valkey-data:
+  searxng-dozzle-data:
 
 networks:
   searxng-network:
