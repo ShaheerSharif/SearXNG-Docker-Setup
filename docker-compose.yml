@@ -11,6 +11,8 @@ services:
       - searxng-core-data:/var/cache/searxng/
     networks:
       - searxng-network
+    labels:
+      - dev.dozzle.group=searxng
 
   valkey:
     container_name: searxng-valkey
@@ -21,6 +23,8 @@ services:
       - searxng-valkey-data:/data/
     networks:
       - searxng-network
+    labels:
+      - dev.dozzle.group=searxng
 
   dozzle:
     container_name: searxng-dozzle
@@ -31,17 +35,12 @@ services:
     networks:
       - searxng-network
     environment:
-      # Define base path of dozzle
       - DOZZLE_BASE=/logs
-      # 
-      # Uncomment to enable container actions (stop, start, restart). See https://dozzle.dev/guide/actions
       - DOZZLE_ENABLE_ACTIONS=true
-      #
-      # Uncomment to allow access to container shells. See https://dozzle.dev/guide/shell
       - DOZZLE_ENABLE_SHELL=true
-      #
-      # Uncomment to enable authentication. See https://dozzle.dev/guide/authentication
-      # - DOZZLE_AUTH_PROVIDER=simple
+      - DOZZLE_FILTER=label=dev.dozzle.group=searxng
+    labels:
+      - dev.dozzle.group=searxng
 
   nginx:
     container_name: searxng-nginx
@@ -67,6 +66,8 @@ services:
       - core
       - valkey
       - dozzle
+    labels:
+      - dev.dozzle.group=searxng
 
 volumes:
   searxng-core-data:
