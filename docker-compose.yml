@@ -11,8 +11,6 @@ services:
       - searxng-core-data:/var/cache/searxng/
     networks:
       - searxng-network
-    labels:
-      - dev.dozzle.group=searxng
 
   valkey:
     container_name: searxng-valkey
@@ -23,8 +21,6 @@ services:
       - searxng-valkey-data:/data/
     networks:
       - searxng-network
-    labels:
-      - dev.dozzle.group=searxng
 
   dozzle:
     container_name: searxng-dozzle
@@ -38,9 +34,7 @@ services:
       - DOZZLE_BASE=/logs
       - DOZZLE_ENABLE_ACTIONS=true
       - DOZZLE_ENABLE_SHELL=true
-      - DOZZLE_FILTER=label=dev.dozzle.group=searxng
-    labels:
-      - dev.dozzle.group=searxng
+      - DOZZLE_FILTER=name=searxng
 
   nginx:
     container_name: searxng-nginx
@@ -66,8 +60,6 @@ services:
       - core
       - valkey
       - dozzle
-    labels:
-      - dev.dozzle.group=searxng
 
 volumes:
   searxng-core-data:
