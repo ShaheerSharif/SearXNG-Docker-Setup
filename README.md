@@ -1,6 +1,6 @@
 # SearXNG Docker Setup
 
-A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an Nginx reverse proxy, with Valkey for caching.
+A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an Nginx reverse proxy, with Valkey for caching. Dozzle is used for visualizing logs.
 
 ## Services
 
@@ -9,6 +9,7 @@ A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an Ng
 | `core`   | `searxng/searxng`        | SearXNG search engine  |
 | `valkey` | `valkey/valkey:9-alpine` | Redis-compatible cache |
 | `nginx`  | `nginx:mainline-alpine`  | Reverse proxy          |
+| `dozzle` | `amir20/dozzle:latest`   | Visulazing Logs        |
 
 ## Prerequisites
 
