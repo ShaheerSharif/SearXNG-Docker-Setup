@@ -32,6 +32,20 @@ cp .env.example .env
 sed -i "s/SEARXNG_SECRET=.*/SEARXNG_SECRET=$(openssl rand -hex 32)/" .env
 ```
 
+3. Add an entry to your `/etc/hosts` (or local DNS) pointing to the host machine. Replace `<domain-name>` with the one specified in `.env`.
+
+> The Nginx `server_name` is composed from `SUBDOMAIN` and `DOMAIN`. By default it's `searxng.local`. Change it if needed.
+
+```
+127.0.0.1        <domain-name>
+```
+
+For example:
+
+```
+127.0.0.1        searxng.local
+```
+
 </details>
 
 <details>
@@ -50,9 +64,21 @@ $secret = -join ((1..32) | ForEach-Object { "{0:x2}" -f (Get-Random -Max 256) })
 (Get-Content .env) -replace 'SEARXNG_SECRET=.*', "SEARXNG_SECRET=$secret" | Set-Content .env
 ```
 
-</details>
+3. Add an entry to your `C:\Windows\System32\drivers\etc\hosts` pointing to the host machine. Replace `<domain-name>` with the one specified in `.env`.
 
 > The Nginx `server_name` is composed from `SUBDOMAIN` and `DOMAIN`. By default it's `searxng.local`. Change it if needed.
+
+```
+127.0.0.1        <domain-name>
+```
+
+For example:
+
+```
+127.0.0.1        searxng.local
+```
+
+</details>
 
 ## Usage
 
@@ -73,19 +99,3 @@ docker compose down
 ```bash
 docker compose logs -f
 ```
-
-## Accessing the Instance
-
-Add an entry to your `/etc/hosts` (or local DNS) pointing to the host machine. (Replace `<domain-name>` with the one specified in `.env`)
-
-```
-127.0.0.1        <domain-name>
-```
-
-For example:
-
-```
-127.0.0.1        searxng.local
-```
-
-Then open `http://<domain-name>` in your browser.
