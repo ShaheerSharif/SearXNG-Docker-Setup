@@ -97,6 +97,10 @@ docker compose down
 
 **View logs**
 
+Logs can be viewed by visiting `http://<domain-name>/logs`. For e.g. `http://searxng.local/logs`.
+
+They can also be viewed in a shell environment using:
+
 ```bash
 docker compose logs -f
 ```
