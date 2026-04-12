@@ -1,6 +1,6 @@
 # SearXNG Docker Setup
 
-A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an Nginx reverse proxy, with Valkey for caching. Dozzle is used for visualizing logs.
+A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an [Nginx](https://nginx.org/en/docs/) reverse proxy, with [Valkey](https://valkey.io/docs/) for caching. [Dozzle](https://coolify.io/docs/services/dozzle) is used for visualizing logs.
 
 ## Services
 
