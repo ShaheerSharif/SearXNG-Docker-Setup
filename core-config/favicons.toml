@@ -1,0 +1,14 @@
+[favicons]
+cfg_schema = 1
+
+[favicons.proxy]
+max_age = 604800
+
+[favicons.proxy.resolver_map]
+"duckduckgo" = "searx.favicons.resolvers.duckduckgo"
+
+[favicons.cache]
+db_url = "/var/cache/searxng/faviconcache.db"
+HOLD_TIME = 604800
+LIMIT_TOTAL_BYTES = 52428800
+BLOB_MAX_BYTES = 40960
