@@ -4,12 +4,12 @@ A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an [N
 
 ## Services
 
-| Service  | Image                    | Description            |
-| -------- | ------------------------ | ---------------------- |
-| `core`   | `searxng/searxng`        | SearXNG search engine  |
-| `valkey` | `valkey/valkey:9-alpine` | Redis-compatible cache |
-| `nginx`  | `nginx:mainline-alpine`  | Reverse proxy          |
-| `dozzle` | `amir20/dozzle:latest`   | Visulazing Logs        |
+| Service  | Image                                                              | Description            |
+| -------- | ------------------------------------------------------------------ | ---------------------- |
+| `core`   | [`searxng/searxng`](https://hub.docker.com/r/searxng/searxng)      | SearXNG search engine  |
+| `valkey` | [`valkey/valkey:9-alpine`](https://hub.docker.com/r/valkey/valkey) | Redis-compatible cache |
+| `nginx`  | [`nginx:mainline-alpine`](https://hub.docker.com/_/nginx)          | Reverse proxy          |
+| `dozzle` | [`amir20/dozzle:latest`](https://hub.docker.com/r/amir20/dozzle)   | Visulazing Logs        |
 
 ## Prerequisites
 
