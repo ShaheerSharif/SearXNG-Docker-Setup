@@ -11,6 +11,12 @@ services:
       - searxng-core-data:/var/cache/searxng/
     networks:
       - searxng-network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:${SEARXNG_PORT:-8080}/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
 
   valkey:
     container_name: searxng-valkey
@@ -21,10 +27,17 @@ services:
       - searxng-valkey-data:/data/
     networks:
       - searxng-network
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
 
   dozzle:
     container_name: searxng-dozzle
     image: amir20/dozzle:latest
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - searxng-dozzle-data:/data
@@ -35,6 +48,12 @@ services:
       - DOZZLE_ENABLE_ACTIONS=true
       - DOZZLE_ENABLE_SHELL=true
       - DOZZLE_FILTER=name=searxng
+    healthcheck:
+      test: ["CMD", "/dozzle", "healthcheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
 
   nginx:
     container_name: searxng-nginx
@@ -57,9 +76,12 @@ services:
     networks:
       - searxng-network
     depends_on:
-      - core
-      - valkey
-      - dozzle
+      core:
+        condition: service_healthy
+      valkey:
+        condition: service_healthy
+      dozzle:
+        condition: service_healthy
 
 volumes:
   searxng-core-data:
