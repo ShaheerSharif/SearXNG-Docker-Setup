@@ -8,6 +8,7 @@ services:
     env_file: ./.env
     volumes:
       - ./core-config/:/etc/searxng/:Z
+      - ./templates:/usr/local/searxng/searx/templates
       - searxng-core-data:/var/cache/searxng/
     networks:
       - searxng-network
