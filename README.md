@@ -1,6 +1,6 @@
 # SearXNG Docker Setup
 
-A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an [Nginx](https://nginx.org/en/docs/) reverse proxy, with [Valkey](https://valkey.io/docs/) for caching. [Dozzle](https://coolify.io/docs/services/dozzle) is used for visualizing logs.
+A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an [Nginx](https://nginx.org/en/docs/) reverse proxy, with [Valkey](https://valkey.io/docs/) for caching.
 
 ## Services
 
@@ -9,7 +9,6 @@ A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an [N
 | `core`   | [`searxng/searxng`](https://hub.docker.com/r/searxng/searxng)      | SearXNG search engine  |
 | `valkey` | [`valkey/valkey:9-alpine`](https://hub.docker.com/r/valkey/valkey) | Redis-compatible cache |
 | `nginx`  | [`nginx:mainline-alpine`](https://hub.docker.com/_/nginx)          | Reverse proxy          |
-| `dozzle` | [`amir20/dozzle:latest`](https://hub.docker.com/r/amir20/dozzle)   | Visulazing Logs        |
 
 ## Prerequisites
 
@@ -97,9 +96,7 @@ docker compose down
 
 **View logs**
 
-Logs can be viewed by visiting `http://<domain-name>/logs`. For e.g. `http://searxng.local/logs`.
-
-They can also be viewed in a shell environment using:
+Logs can be viewd in a shell environment using:
 
 ```bash
 docker compose logs -f
