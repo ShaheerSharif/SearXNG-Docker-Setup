@@ -1,6 +1,6 @@
 # SearXNG Docker Setup
 
-A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an [Nginx](https://nginx.org/en/docs/) reverse proxy, with [Valkey](https://valkey.io/docs/) for caching.
+A self-hosted [SearXNG](https://docs.searxng.org/), with [Valkey](https://valkey.io/docs/) for caching.
 
 ## Services
 
@@ -8,7 +8,6 @@ A self-hosted [SearXNG](https://docs.searxng.org/) instance running behind an [N
 | -------- | ------------------------------------------------------------------ | ---------------------- |
 | `core`   | [`searxng/searxng`](https://hub.docker.com/r/searxng/searxng)      | SearXNG search engine  |
 | `valkey` | [`valkey/valkey:9-alpine`](https://hub.docker.com/r/valkey/valkey) | Redis-compatible cache |
-| `nginx`  | [`nginx:mainline-alpine`](https://hub.docker.com/_/nginx)          | Reverse proxy          |
 
 ## Prerequisites
 
@@ -32,20 +31,6 @@ cp .env.example .env
 sed -i "s/SEARXNG_SECRET=.*/SEARXNG_SECRET=$(openssl rand -hex 32)/" .env
 ```
 
-3. Add an entry to your `/etc/hosts` (or local DNS) pointing to the host machine. Replace `<domain-name>` with the one specified in `.env`.
-
-> The Nginx `server_name` is composed from `SUBDOMAIN` and `DOMAIN`. By default it's `searxng.local`. Change it if needed.
-
-```
-127.0.0.1        <domain-name>
-```
-
-For example:
-
-```
-127.0.0.1        searxng.local
-```
-
 </details>
 
 <details>
@@ -62,20 +47,6 @@ Copy-Item .env.example .env
 ```powershell
 $secret = -join ((1..32) | ForEach-Object { "{0:x2}" -f (Get-Random -Max 256) })
 (Get-Content .env) -replace 'SEARXNG_SECRET=.*', "SEARXNG_SECRET=$secret" | Set-Content .env
-```
-
-3. Add an entry to your `C:\Windows\System32\drivers\etc\hosts` pointing to the host machine. Replace `<domain-name>` with the one specified in `.env`.
-
-> The Nginx `server_name` is composed from `SUBDOMAIN` and `DOMAIN`. By default it's `searxng.local`. Change it if needed.
-
-```
-127.0.0.1        <domain-name>
-```
-
-For example:
-
-```
-127.0.0.1        searxng.local
 ```
 
 </details>
