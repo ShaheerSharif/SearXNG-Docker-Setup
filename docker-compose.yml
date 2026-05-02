@@ -12,12 +12,6 @@ services:
       - searxng-core-data:/var/cache/searxng/
     networks:
       - searxng-network
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:${SEARXNG_PORT:-8080}/healthz"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
     cap_drop:
       - ALL
     cap_add:
@@ -39,12 +33,6 @@ services:
       - searxng-valkey-data:/data/
     networks:
       - searxng-network
-    healthcheck:
-      test: ["CMD", "valkey-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
     cap_drop:
       - ALL
     cap_add:
