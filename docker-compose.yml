@@ -9,6 +9,8 @@ services:
     environment:
       - UWSGI_WORKERS={UWSGI_WORKERS:-2}
       - UWSGI_THREADS={UWSGI_THREADS:-2}
+    ports:
+      - "${SEARXNG_PORT:-8181}:8080"
     volumes:
       - ./core-config/:/etc/searxng/:Z
       - ./templates:/usr/local/searxng/searx/templates
