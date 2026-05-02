@@ -7,8 +7,8 @@ services:
     restart: unless-stopped
     env_file: ./.env
     environment:
-      - UWSGI_WORKERS={UWSGI_WORKERS:-2}
-      - UWSGI_THREADS={UWSGI_THREADS:-2}
+      - UWSGI_WORKERS=${UWSGI_WORKERS:-2}
+      - UWSGI_THREADS=${UWSGI_THREADS:-2}
     ports:
       - "${SEARXNG_PORT:-8181}:8080"
     volumes:
@@ -26,8 +26,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "1m"
-        max-file: "1"
+        max-size: "10m"
+        max-file: "3"
 
   valkey:
     container_name: searxng-valkey
@@ -47,8 +47,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "1m"
-        max-file: "1"
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   searxng-core-data:
