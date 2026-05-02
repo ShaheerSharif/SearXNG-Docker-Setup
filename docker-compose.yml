@@ -18,6 +18,17 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
 
   valkey:
     container_name: searxng-valkey
@@ -34,6 +45,17 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
 
 volumes:
   searxng-core-data:
