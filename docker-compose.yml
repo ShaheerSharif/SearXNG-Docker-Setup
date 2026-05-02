@@ -42,7 +42,3 @@ volumes:
 networks:
   searxng-network:
     driver: bridge
-
-configs:
-  nginx-config:
-    file: ./nginx/default.conf.template
