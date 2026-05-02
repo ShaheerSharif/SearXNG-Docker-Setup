@@ -6,6 +6,9 @@ services:
     image: docker.io/searxng/searxng:${SEARXNG_VERSION:-latest}
     restart: unless-stopped
     env_file: ./.env
+    environment:
+      - UWSGI_WORKERS={UWSGI_WORKERS:-2}
+      - UWSGI_THREADS={UWSGI_THREADS:-2}
     volumes:
       - ./core-config/:/etc/searxng/:Z
       - ./templates:/usr/local/searxng/searx/templates
