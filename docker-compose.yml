@@ -5,6 +5,7 @@ services:
     container_name: searxng-core
     image: docker.io/searxng/searxng:${SEARXNG_VERSION:-latest}
     restart: unless-stopped
+    user: "977:977"
     env_file: ./.env
     environment:
       - UWSGI_WORKERS=${UWSGI_WORKERS:-2}
