@@ -14,7 +14,7 @@ services:
       - "${PORT:-8181}:8080"
     volumes:
       - ./core-config/:/etc/searxng/:Z
-      - ./templates:/usr/local/searxng/searx/templates
+      - ./templates:/usr/local/searxng/searx/templates:ro
       - searxng-core-data:/var/cache/searxng/
     networks:
       - searxng-network
